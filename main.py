@@ -9,11 +9,12 @@ def index():
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    data = request.get_json()
-    code = data.get("code", "")
+    data     = request.get_json()
+    code     = data.get("code", "")
+    language = data.get("language", "c")
     if not code.strip():
         return jsonify({"error": "No code provided"}), 400
-    result = analyze_code(code)
+    result = analyze_code(code, language)
     return jsonify(result)
 
 if __name__ == "__main__":
